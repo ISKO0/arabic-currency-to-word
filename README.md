@@ -16,6 +16,8 @@ A Python library to convert numeric values and currency amounts into fully accur
 
 ```bash
 pip install arabic-currency-to-word
+Or
+pip install git+https://github.com/ISKO0/arabic-currency-to-word.git
 ```
 
 ### 🚀 Example Usage
@@ -46,15 +48,16 @@ print(result)
 
 - Python 3.6+
 
+## ⚠️ Limitations
+
+- This library is designed for **Arabic language only** (currently no multi-language support).
+- Currency formats must be manually provided (no auto-detection or conversion).
+- Does not support **feminine grammatical forms** (e.g., "إحدى" for feminine words).
+- Limited to integer and two-digit decimal values only (e.g., 99.99).
+- No built-in support for currency formatting (e.g., separators, localization).
+- No support for advanced grammatical cases (الإضافة، التمييز، إلخ).
+- Not suitable for voice or TTS output directly (requires reshaping and RTL handling separately).
+
 ### 📄 License
 
 MIT License
-
-
-### 📥 Install directly from GitHub
-
-You can also install the package directly from the GitHub repository:
-
-```bash
-pip install git+https://github.com/ISKO0/arabic-currency-to-word.git
-```
