@@ -49,3 +49,12 @@ print(result)
 ### 📄 License
 
 MIT License
+
+
+### 📥 Install directly from GitHub
+
+You can also install the package directly from the GitHub repository:
+
+```bash
+pip install git+https://github.com/Karout/arabic-currency-to-word.git
+```
