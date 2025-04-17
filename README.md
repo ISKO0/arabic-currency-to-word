@@ -56,5 +56,5 @@ MIT License
 You can also install the package directly from the GitHub repository:
 
 ```bash
-pip install git+https://github.com/Karout/arabic-currency-to-word.git
+pip install git+https://github.com/ISKO0/arabic-currency-to-word.git
 ```
