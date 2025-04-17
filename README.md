@@ -41,7 +41,7 @@ result = currency_to_arabic_words(
 )
 
 print(result)
-# Output: ديناران و خمسة و سبعون فلسًا
+# Output: ديناران و خمسة و سبعون فلس
 ```
 
 ### 🐍 Requirements
