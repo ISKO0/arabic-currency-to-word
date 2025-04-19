@@ -30,7 +30,7 @@ print(result)
 ## 🔤 Supported Languages
 
 - Arabic 🇸🇦
-- English 🇬🇧
+- English (United States 🇺🇸)
 
 ## ⚠️ Limitations
 
