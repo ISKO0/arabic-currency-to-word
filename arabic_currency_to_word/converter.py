@@ -1,4 +1,5 @@
 from .currencies import currencies
+from .models import Currency
 
 def number_to_arabic_words(number):
     if number == 0:
@@ -17,7 +18,7 @@ def number_to_arabic_words(number):
         words.append(str(number))  # fallback
     return " ".join([w for w in words if w])
 
-class Currency:
+### MOVED TO models.py
     def __init__(self, code, singular, dual, plural, fraction_singular, fraction_dual, fraction_plural, part_precision=2):
         self.code = code
         self.singular = singular

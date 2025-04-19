@@ -1,4 +1,4 @@
-from .converter import Currency
+from .models import Currency
 
 currencies = {
     "AED": Currency("AED", "درهم", "درهمان", "دراهم", "فلس", "فلسان", "فلوس", 2),
