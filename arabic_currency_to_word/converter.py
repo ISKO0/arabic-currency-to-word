@@ -4,40 +4,71 @@ from .models import Currency
 # تبسيط تحويل الرقم إلى كلمات عربية (مستوى أساسي للتجربة)
 def number_to_arabic_words(number):
     ones = ["", "واحد", "اثنان", "ثلاثة", "أربعة", "خمسة", "ستة", "سبعة", "ثمانية", "تسعة"]
-    tens = ["", "عشرة", "عشرون", "ثلاثون", "أربعون", "خمسون", "ستون", "سبعون", "ثمانون", "تسعون"]
+    teens = ["", "أحد عشر", "اثنا عشر", "ثلاثة عشر", "أربعة عشر", "خمسة عشر",
+             "ستة عشر", "سبعة عشر", "ثمانية عشر", "تسعة عشر"]
+    tens = ["", "عشرة", "عشرون", "ثلاثون", "أربعون", "خمسون",
+            "ستون", "سبعون", "ثمانون", "تسعون"]
+    hundreds = ["", "مائة", "مائتان", "ثلاثمائة", "أربعمائة", "خمسمائة",
+                "ستمائة", "سبعمائة", "ثمانمائة", "تسعمائة"]
 
     if number == 0:
         return "صفر"
-    if number < 10:
-        return ones[number]
-    if number < 100:
-        u = number % 10
-        t = number // 10
-        if u == 0:
-            return tens[t]
-        return f"{ones[u]} و {tens[t]}"
-    if number < 1000:
-        h = number // 100
-        r = number % 100
-        h_word = ones[h] + " مائة" if h > 1 else "مائة"
-        return f"{h_word}" + (f" و {number_to_arabic_words(r)}" if r else "")
-    if number < 1000000:
-        th = number // 1000
-        r = number % 1000
-        if th == 1:
-            th_word = "ألف"
-        elif th == 2:
-            th_word = "ألفان"
-        elif 3 <= th <= 10:
-            th_word = f"{number_to_arabic_words(th)} آلاف"
+
+    def _below_100(n):
+        if n < 10:
+            return ones[n]
+        elif 10 < n < 20:
+            return teens[n - 10]
+        elif n == 10:
+            return "عشرة"
         else:
-            th_word = f"{number_to_arabic_words(th)} ألف"
-        return f"{th_word}" + (f" و {number_to_arabic_words(r)}" if r else "")
-    else:
-        m = number // 1000000
-        r = number % 1000000
-        m_word = f"{number_to_arabic_words(m)} مليون"
-        return f"{m_word}" + (f" و {number_to_arabic_words(r)}" if r else "")
+            u = n % 10
+            t = n // 10
+            if u == 0:
+                return tens[t]
+            return f"{ones[u]} و {tens[t]}"
+
+    def _below_1000(n):
+        h = n // 100
+        r = n % 100
+        parts = []
+        if h:
+            parts.append(hundreds[h])
+        if r:
+            parts.append(_below_100(r))
+        return " و ".join(parts)
+
+    parts = []
+
+    millions = number // 1_000_000
+    if millions:
+        if millions == 1:
+            parts.append("مليون")
+        elif millions == 2:
+            parts.append("مليونان")
+        elif 3 <= millions <= 10:
+            parts.append(f"{_below_1000(millions)} ملايين")
+        else:
+            parts.append(f"{number_to_arabic_words(millions)} مليون")
+        number %= 1_000_000
+
+    thousands = number // 1_000
+    if thousands:
+        if thousands == 1:
+            parts.append("ألف")
+        elif thousands == 2:
+            parts.append("ألفان")
+        elif 3 <= thousands <= 10:
+            parts.append(f"{_below_1000(thousands)} آلاف")
+        else:
+            parts.append(f"{number_to_arabic_words(thousands)} ألف")
+        number %= 1_000
+
+    if number:
+        parts.append(_below_1000(number))
+
+    return " و ".join(parts)
+
 
 def number_to_english_words(number):
     import inflect
