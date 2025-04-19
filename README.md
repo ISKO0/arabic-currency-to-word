@@ -1,63 +1,39 @@
-# arabic-currency-to-word
+# 🧮 arabic-currency-to-word
 
-A Python library to convert numeric values and currency amounts into fully accurate Arabic words.
+A powerful Python library for converting numbers and currency values into accurate Arabic (and English) words with full grammatical correctness.
 
-### ✅ Features
+## ✅ Features
 
-- Converts both integer and decimal numbers to Arabic words.
-- Full support for Arabic currency forms: singular, dual, and plural.
-- Supports Arabic currencies like: ريال (Riyal), دينار (Dinar), درهم (Dirham), جنيه (Pound), دولار (Dollar), and more.
-- Handles currency fractions like: هللة (Halala), فلس (Fils), قرش (Qirsh), سنت (Cent).
-- Supports negative numbers and produces grammatically correct Arabic.
-- Accurate handling of decimals using the original number string to avoid floating point issues.
-- Fully customizable for any new currency or fraction format.
+- Convert numbers into **Arabic or English words**
+- Support for **singular, dual, plural** currency forms
+- Full Arabic grammar: مذكر/مؤنث، مفرد/جمع، الأرقام فوق المليون والمليار
+- Multi-currency support (SAR, AED, SYP, USD, etc.)
+- Intelligent handling of **fractions and decimal parts**
+- Ready to be used in financial documents, invoices, or Odoo systems
 
-### 📦 Installation
+## 📦 Installation
 
 ```bash
-pip install arabic-currency-to-word
-Or
 pip install git+https://github.com/ISKO0/arabic-currency-to-word.git
 ```
 
-### 🚀 Example Usage
+## 🚀 Example Usage
 
 ```python
-from arabic_currency_to_word import currency_to_arabic_words
+from arabic_currency_to_word import to_word
 
-result = currency_to_arabic_words(
-    number=2.75,
-    original_number="2.75",
-    currency_forms={
-        "singular": "دينار",
-        "dual": "ديناران",
-        "plural": "دنانير"
-    },
-    fraction_forms={
-        "singular": "فلس",
-        "dual": "فلسان",
-        "plural": "فلوس"
-    }
-)
-
+result = to_word(1234.56, currency_code='SAR', language='Arabic')
 print(result)
-# Output: ديناران و خمسة و سبعون فلس
+# → فقط ألف و مائتان و أربعة و ثلاثون ريال سعودي و ستة و خمسون هللة لا غير.
 ```
 
-### 🐍 Requirements
+## 🔤 Supported Languages
 
-- Python 3.6+
+- Arabic 🇸🇦
+- English 🇬🇧
 
 ## ⚠️ Limitations
 
-- This library is designed for **Arabic language only** (currently no multi-language support).
-- Currency formats must be manually provided (no auto-detection or conversion).
-- Does not support **feminine grammatical forms** (e.g., "إحدى" for feminine words).
-- Limited to integer and two-digit decimal values only (e.g., 99.99).
-- No built-in support for currency formatting (e.g., separators, localization).
-- No support for advanced grammatical cases (الإضافة، التمييز، إلخ).
-- Not suitable for voice or TTS output directly (requires reshaping and RTL handling separately).
-
-### 📄 License
-
-MIT License
+- Only Arabic and English are supported.
+- Currency definitions must be preconfigured (but you can add more).
+- No TTS support (you can integrate reshaping & bidi manually for display).

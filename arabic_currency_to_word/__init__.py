@@ -1,1 +1,1 @@
-from .converter import currency_to_arabic_words, number_to_arabic_words
+from .converter import to_word, Currency, NumberToWord
