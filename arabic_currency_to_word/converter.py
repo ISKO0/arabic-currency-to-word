@@ -40,6 +40,18 @@ def number_to_arabic_words(number):
 
     parts = []
 
+    billions = number // 1_000_000_000
+    if billions:
+        if billions == 1:
+            parts.append("مليار")
+        elif billions == 2:
+            parts.append("ملياران")
+        elif 3 <= billions <= 10:
+            parts.append(f"{_below_1000(billions)} مليارات")
+        else:
+            parts.append(f"{number_to_arabic_words(billions)} مليار")
+        number %= 1_000_000_000
+
     millions = number // 1_000_000
     if millions:
         if millions == 1:
@@ -52,7 +64,7 @@ def number_to_arabic_words(number):
             parts.append(f"{number_to_arabic_words(millions)} مليون")
         number %= 1_000_000
 
-    thousands = number // 1_000
+    thousands = number // 1000
     if thousands:
         if thousands == 1:
             parts.append("ألف")
@@ -62,7 +74,7 @@ def number_to_arabic_words(number):
             parts.append(f"{_below_1000(thousands)} آلاف")
         else:
             parts.append(f"{number_to_arabic_words(thousands)} ألف")
-        number %= 1_000
+        number %= 1000
 
     if number:
         parts.append(_below_1000(number))
